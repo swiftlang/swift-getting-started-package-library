@@ -10,14 +10,16 @@
 //
 //===--------------------------------------------------------------------
 
+import Testing
 @testable import MyLibrary
-import XCTest
 
-final class MyLibraryTests: XCTestCase {
-  func testEmail() throws {
+struct MyLibraryTests {
+  @Test func email() throws {
     let email = try Email("john.appleseed@apple.com")
-    XCTAssertEqual(email.description, "john.appleseed@apple.com")
+    #expect(email.description == "john.appleseed@apple.com")
 
-    XCTAssertThrowsError(try Email("invalid"))
+    #expect(throws: (any Error).self) {
+      try Email("invalid")
+    }
   }
 }
